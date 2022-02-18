@@ -1,0 +1,3 @@
+[submodule "lib/SuperMemoVim"]
+	path = lib/SuperMemoVim
+	url = https://github.com/MasterHowToLearn/SuperMemoVim
