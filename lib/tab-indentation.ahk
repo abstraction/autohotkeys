@@ -3,6 +3,7 @@
 
 #IfWinActive ahk_group SuperMemo
 {
+
   Tab::
     if (ActivateWdw(true, true, SmElements)) {
       Loop, 4{
@@ -12,4 +13,5 @@
       }
     }
   Return
+
 }
