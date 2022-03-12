@@ -7,17 +7,25 @@
 ; admin access and PureText will simply a plebeian
 
 #IfWinActive ahk_group SuperMemo
-{
+    {
+        ; Don't think I have to send a CtrlUp event...
+        ; NOTE default Macos kbd for this is Opt+L/R but we're changing it to
+        
+        ; Word hopping and selecting
+        ; Cmd+Opt+L/R to prevent kbd conflix with Sm
+        ^!Left::Send {CtrlDown}{Left} ; start of word boundary, like w
+        ^!Right::Send {CtrlDown}{Right} ; start of prev word boundary,like b
+        ^!+Left::Send {CtrlDown}{ShiftDown}{Left} ; select word boundary, like v-w
+        ^!+Right::Send {CtrlDown}{ShiftDown}{Right} ; select prev word boundary, like v-b
 
-    ; Don't think I have to send a CtrlUp event? isn't not pressing the key basically it? 
-    ^!Left::Send {CtrlDown}{Left} ; start of word boundary, like w
-    ^!Right::Send {CtrlDown}{Right} ; start of prev word boundary,like b
-    ^!+Left::Send {CtrlDown}{ShiftDown}{Left} ; select word boundary, like v-w
-    ^!+Right::Send {CtrlDown}{ShiftDown}{Right} ; select prev word boundary, like v-b
-
-    ^Left::Send {Home} ; Line start
-    ^Right::Send {End} ; Line end
-    ^+Left::Send {ShiftDown}{Home} ; Select from line start
-    ^+Right::Send {ShiftDown}{End} ; Select from ine end
-
-}
+        ; Line hopping and selecting + page up down
+        ^Left::Send {Home} ; Line start
+        ^Right::Send {End} ; Line end
+        ^+Left::Send {ShiftDown}{Home} ; Select from line start
+        ^+Right::Send {ShiftDown}{End} ; Select from ine end
+        
+        ; Note to self: don't bind Alt+Left from here, instead bind it from Parallels GUI because
+        ; AHK has something called "#MenuMaskKey" which sends Ctrl with every Alt so what will be
+        ; sent is Alt+Ctrl+Left (which in turn will send Alt+Home because of mapping on line 22)
+        ; https://www.autohotkey.com/docs/Hotkeys.htm#Symbols
+    }
