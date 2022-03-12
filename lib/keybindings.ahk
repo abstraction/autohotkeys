@@ -6,6 +6,11 @@
 ; ^ Not needed by I am paranoid because I broke PureText when I gave Supermemo
 ; admin access and PureText will simply a plebeian
 
+; Quick Doc
+; + Shift
+; ! Alt/Opt
+; ^ Ctrl/Cmd
+
 #IfWinActive ahk_group SuperMemo
     {
         ; Don't think I have to send a CtrlUp event...
@@ -18,9 +23,10 @@
         ^!+Left::Send {CtrlDown}{ShiftDown}{Left} ; select word boundary, like v-w
         ^!+Right::Send {CtrlDown}{ShiftDown}{Right} ; select prev word boundary, like v-b
 
-        ; Line hopping and selecting + page up down
+        ; Line hopping and selecting
         ^Left::Send {Home} ; Line start
         ^Right::Send {End} ; Line end
+        ; Page up down
         ^+Left::Send {ShiftDown}{Home} ; Select from line start
         ^+Right::Send {ShiftDown}{End} ; Select from ine end
         
@@ -28,4 +34,7 @@
         ; AHK has something called "#MenuMaskKey" which sends Ctrl with every Alt so what will be
         ; sent is Alt+Ctrl+Left (which in turn will send Alt+Home because of mapping on line 22)
         ; https://www.autohotkey.com/docs/Hotkeys.htm#Symbols
+
+        ^Home::Send {AltDown}{PgUp}
+        ^End:: Send {AltDown}{PgDn}
     }
